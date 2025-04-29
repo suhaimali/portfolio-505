@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,12 +247,14 @@
       background: #fff;
       border-radius: 12px;
       box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s ease;
+      border: 2px solid transparent;
     }
 
     .service-item:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      border: 2px solid #ff6f00;
     }
 
     .service-item i {
@@ -353,7 +354,7 @@
     }
 
     .project-item:hover {
-      transform: translateY(-8px);
+      transform: scale(1.05);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
 
@@ -373,16 +374,14 @@
       font-weight: 500;
     }
 
-    /* Footer Section */
-    #footer {
+    /* Contact Section */
+    #contact {
       background: #1a1a1a;
       color: #fff;
-      padding: 60px 0;
-      text-align: center;
       position: relative;
     }
 
-    #footer::before {
+    #contact::before {
       content: '';
       position: absolute;
       top: 0;
@@ -394,34 +393,108 @@
       opacity: 0.5;
     }
 
-    #footer .container {
+    #contact .container {
       position: relative;
       z-index: 1;
     }
 
-    #footer p {
+    #contact .contact-container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    #contact form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    #contact .form-group {
+      position: relative;
+    }
+
+    #contact input,
+    #contact textarea {
+      width: 100%;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1rem;
+      transition: border 0.3s ease, background 0.3s ease;
+    }
+
+    #contact input:focus,
+    #contact textarea:focus {
+      border: 1px solid #ff6f00;
+      background: rgba(255, 255, 255, 0.2);
+      outline: none;
+    }
+
+    #contact label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    #contact input:focus + label,
+    #contact textarea:focus + label,
+    #contact input:not(:placeholder-shown) + label,
+    #contact textarea:not(:placeholder-shown) + label {
+      top: -10px;
+      left: 10px;
+      font-size: 0.8rem;
+      color: #ff6f00;
+      background: #1a1a1a;
+      padding: 0 5px;
+    }
+
+    #contact .btn-primary {
+      align-self: center;
+      padding: 12px 30px;
+    }
+
+    #contact .contact-details {
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    #contact .contact-details p {
       font-size: clamp(1rem, 2vw, 1.2rem);
       margin: 15px 0;
     }
 
-    #footer a {
+    #contact .contact-details a {
       color: #ff6f00;
       text-decoration: none;
       transition: color 0.3s ease;
     }
 
-    #footer a:hover {
+    #contact .contact-details a:hover {
       color: #e65a00;
     }
 
-    #footer .social-links a {
+    #contact .social-links {
+      margin-top: 20px;
+    }
+
+    #contact .social-links a {
       font-size: 1.8rem;
       margin: 0 15px;
       color: #fff;
       transition: color 0.3s ease, transform 0.3s ease;
     }
 
-    #footer .social-links a:hover {
+    #contact .social-links a:hover {
       color: #ff6f00;
       transform: translateY(-3px);
     }
@@ -492,7 +565,7 @@
       .service-item, .project-item {
         flex-direction: column;
         text-align: center;
-        padding: 15px;
+ IMPLEMENTED THE CONTACT FORM IN THE CONTACT SECTION
       }
 
       .skill-item {
@@ -500,6 +573,10 @@
       }
 
       #about .about-container {
+        padding: 20px;
+      }
+
+      #contact .contact-container {
         padding: 20px;
       }
     }
@@ -544,16 +621,17 @@
         font-size: 1rem;
       }
 
-      #footer p {
+      #contact .contact-details p {
         font-size: 1rem;
       }
 
-      #footer .social-links a {
+      #contact .social-links a {
         font-size: 1.5rem;
         margin: 0 10px;
       }
 
-      #about .about-container {
+      #about .about-container,
+      #contact .contact-container {
         padding: 15px;
       }
     }
@@ -574,7 +652,7 @@
           <li class="nav-item"><a class="nav-link" href="#services" aria-label="Services">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="#skills" aria-label="Skills">Skills</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects" aria-label="Projects">Projects</a></li>
-          <li class="nav-item"><a class="nav-link" href="#footer" aria-label="Contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact" aria-label="Contact">Contact</a></li>
         </ul>
       </div>
     </div>
@@ -679,17 +757,36 @@
     </div>
   </section>
 
-  <!-- Footer Section -->
-  <section id="footer">
+  <!-- Contact Section -->
+  <section id="contact">
     <div class="container">
       <h2 class="animate">Contact Me</h2>
-      <p class="animate animate-delay-1">Email: <a href="mailto:alivpsuhaim@gmail.com">alivpsuhaim@gmail.com</a></p>
-      <p class="animate animate-delay-2">Phone: <a href="tel:+918891479505">+918891479505</a></p>
-      <p class="animate animate-delay-3">Thank you for visiting my portfolio. Let's collaborate!</p>
-      <div class="social-links animate animate-delay-3">
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <div class="contact-container">
+        <form>
+          <div class="form-group animate animate-delay-1">
+            <input type="text" id="name" name="name" placeholder=" " required />
+            <label for="name">Your Name</label>
+          </div>
+          <div class="form-group animate animate-delay-2">
+            <input type="email" id="email" name="email" placeholder=" " required />
+            <label for="email">Your Email</label>
+          </div>
+          <div class="form-group animate animate-delay-3">
+            <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+            <label for="message">Your Message</label>
+          </div>
+          <button type="submit" class="btn btn-primary animate animate-delay-3">Send Message</button>
+        </form>
+        <div class="contact-details animate animate-delay-3">
+          <p>Email: <a href="mailto:alivpsuhaim@gmail.com">alivpsuhaim@gmail.com</a></p>
+          <p>Phone: <a href="tel:+918891479505">+918891479505</a></p>
+          <p>Thank you for visiting my portfolio. Let's collaborate!</p>
+          <div class="social-links">
+            <a href="#" aria-label="Facebook" class="animate animate-delay-3"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter" class="animate animate-delay-3"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="LinkedIn" class="animate animate-delay-3"><i class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>

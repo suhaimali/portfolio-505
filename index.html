@@ -2,37 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Suhaim's Textbook Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
-  <link rel="icon" href="img/logo.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suhaim's Notebook Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
+  <link rel="icon" href="img/logo.jpg" />
   <style>
-    body {
+    /* General Styles */
+    * {
       margin: 0;
-      font-family: 'Georgia', serif;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Arial', sans-serif;
+      background: linear-gradient(135deg, #e3e7eb, #d9e1ff);
       display: flex;
       justify-content: center;
       align-items: center;
-      background: #f0f2f5;
-      min-height: 100vh; /* Allow body to grow beyond viewport */
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .book-container {
-      perspective: 3000px;
-      width: 90vw; /* Relative width */
-      max-width: 900px;
-      height: 80vh; /* Relative height */
-      max-height: 600px;
+
+    /* Notebook Container */
+    .notebook-container {
+      perspective: 2000px;
+      width: 85vw;
+      max-width: 700px;
+      height: 70vh;
+      max-height: 500px;
       position: relative;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
     }
-    .book {
+
+    .notebook {
       width: 100%;
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.8s ease;
+      transition: transform 0.7s ease-in-out;
     }
+
+    /* Page Styles */
     .page {
       width: 50%;
       height: 100%;
@@ -40,43 +52,46 @@
       top: 0;
       right: 0;
       transform-origin: left center;
-      transition: transform 1s ease-in-out, z-index 0.5s;
-      background: #ffffff;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.4s;
+      background: #fff;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
       z-index: 0;
-      overflow-y: auto; /* Allow scrolling within page */
+      overflow-y: auto;
     }
+
     .page .content {
       height: 100%;
-      padding: 5vw; /* Relative padding */
+      padding: 3vw;
       box-sizing: border-box;
       opacity: 0;
       transform: translateY(20px);
-      animation: slideIn 0.8s forwards 0.3s;
-      font-size: clamp(14px, 2vw, 16px); /* Responsive font size */
-    }
-    .page.active {
-      z-index: 10;
-    }
-    .page.flipped {
-      transform: rotateY(-180deg);
-      z-index: 1;
-    }
-    .welcome-page, .about-section, .services-section, .skills-section, .projects-section, .footer {
-      height: 100%;
+      animation: slideIn 0.6s forwards 0.3s;
+      font-size: clamp(14px, 1.6vw, 16px);
+      line-height: 1.5;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
     }
+
+    .page.active {
+      z-index: 10;
+    }
+
+    .page.flipped {
+      transform: rotateY(-180deg);
+      z-index: 3;
+    }
+
+    /* Section Styles */
     .welcome-page {
       background: url('https://images.unsplash.com/photo-1516321310768-8d0c4c62551c') center/cover no-repeat;
-      color: white;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
       position: relative;
-      overflow: hidden;
     }
+
     .welcome-page::before {
       content: '';
       position: absolute;
@@ -84,202 +99,223 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.35);
       z-index: 0;
     }
+
     .welcome-page > * {
       position: relative;
       z-index: 1;
     }
+
     .welcome-page img {
-      width: clamp(80px, 15vw, 100px); /* Responsive image size */
-      height: clamp(80px, 15vw, 100px);
+      width: clamp(70px, 12vw, 90px);
+      height: clamp(70px, 12vw, 90px);
       border-radius: 50%;
       border: 3px solid #ff6f00;
-      margin-bottom: 20px;
-      transition: transform 0.5s ease;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+      loading: lazy;
     }
+
     .welcome-page img:hover {
       transform: scale(1.1);
     }
-    .about-section, .services-section, .skills-section, .projects-section, .footer {
+
+    .about-section, .skills-section {
       background: #fffef0;
     }
+
     .about-section img {
-      width: clamp(100px, 18vw, 120px);
-      height: clamp(100px, 18vw, 120px);
+      width: clamp(80px, 14vw, 100px);
+      height: clamp(80px, 14vw, 100px);
       border-radius: 50%;
       border: 3px solid #ff6f00;
-      margin-bottom: 20px;
-      transition: transform 0.5s ease;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+      loading: lazy;
     }
+
     .about-section img:hover {
       transform: scale(1.1);
     }
-    .services-section .service-item {
+
+    /* Skill Items */
+    .skill-item {
       display: flex;
       align-items: center;
       gap: 10px;
       margin: 8px 0;
-      font-size: clamp(16px, 2.5vw, 18px);
+      font-size: clamp(15px, 2vw, 16px);
       color: #333;
-      transition: transform 0.3s ease, background 0.3s ease;
       padding: 8px;
-      border-radius: 5px;
+      border-radius: 6px;
+      transition: transform 0.3s ease, background 0.3s ease;
     }
-    .services-section .service-item:hover {
-      transform: translateX(10px);
-      background: #f1f1f1;
+
+    .skill-item:hover {
+      transform: translateX(8px);
+      background: #f5f5f5;
     }
-    .services-section .service-item i {
+
+    .skill-item i {
       color: #0288d1;
       transition: color 0.3s ease;
     }
-    .services-section .service-item:hover i {
+
+    .skill-item:hover i {
       color: #ff6f00;
     }
-    .skill-item, .project-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 8px 0;
-      font-size: clamp(16px, 2.5vw, 18px);
-      color: #333;
-      transition: transform 0.3s ease, background 0.3s ease;
-      padding: 8px;
-      border-radius: 5px;
-    }
-    .skill-item:hover, .project-item:hover {
-      transform: translateX(10px);
-      background: #f1f1f1;
-    }
-    .skill-item i, .project-item i {
-      color: #0288d1;
-      transition: color 0.3s ease;
-    }
-    .skill-item:hover i, .project-item:hover i {
-      color: #ff6f00;
-    }
-    .footer {
-      background: #2e2e2e;
+
+    /* Contact Section */
+    .contact-section {
+      background: #1a1a1a;
       color: #fff;
-      transition: background 0.5s ease;
+      padding: 15px;
     }
-    .footer p {
-      margin: 5px;
+
+    .contact-section p {
+      margin: 6px 0;
       opacity: 0;
-      animation: fadeIn 1s forwards 0.5s;
-      font-size: clamp(14px, 2vw, 16px);
+      animation: fadeIn 0.8s forwards 0.4s;
+      font-size: clamp(14px, 1.6vw, 16px);
     }
+
+    /* Navigation Buttons */
     .nav-buttons {
       position: absolute;
-      bottom: 20px;
-      right: 20px;
+      bottom: 15px;
+      right: 15px;
       display: flex;
       gap: 10px;
     }
+
     .nav-btn {
-      background: #ff6f00;
+      background: linear-gradient(45deg, #ff6f00, #ff8f00);
       color: #fff;
       border: none;
       padding: clamp(8px, 2vw, 10px) clamp(12px, 3vw, 15px);
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
+      font-size: clamp(14px, 1.6vw, 15px);
       transition: background 0.3s ease, transform 0.3s ease;
-      font-size: clamp(14px, 2vw, 16px);
     }
+
     .nav-btn:hover {
-      background: #e65a00;
-      transform: scale(1.05);
+      background: linear-gradient(45deg, #e65a00, #ff6f00);
+      transform: translateY(-2px);
     }
-    .thank-you-page {
-      animation: fadeIn 1.5s ease-in-out forwards;
-    }
+
+    /* Animations */
     @keyframes slideIn {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
+
     @keyframes fadeIn {
-      0% { opacity: 0; transform: translateY(20px); }
+      0% { opacity: 0; transform: translateY(15px); }
       100% { opacity: 1; transform: translateY(0); }
     }
-    @keyframes bookOpen {
+
+    @keyframes notebookOpen {
       0% { transform: rotateY(0deg); }
       100% { transform: rotateY(-10deg); }
     }
-    .book:hover {
-      animation: bookOpen 0.5s forwards;
+
+    .notebook:hover {
+      animation: notebookOpen 0.5s forwards;
     }
 
-    /* Responsive adjustments */
+    /* Responsive Design */
     @media (max-width: 768px) {
-      .book-container {
-        width: 95vw;
-        height: 90vh;
-        max-height: none; /* Remove fixed height on mobile */
+      .notebook-container {
+        width: 90vw;
+        height: 80vh;
+        max-height: none;
       }
+
       .page {
-        width: 100%; /* Full width on mobile */
+        width: 100%;
         right: 0;
-        transform-origin: center; /* Center flip for better mobile experience */
+        transform-origin: center;
       }
+
       .page.flipped {
-        transform: rotateY(-360deg); /* Full flip for mobile */
+        transform: rotateY(-360deg);
       }
+
       .page .content {
         padding: 20px;
         font-size: 14px;
       }
+
       .welcome-page img, .about-section img {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
       }
+
       .nav-buttons {
         bottom: 10px;
         right: 10px;
-        flex-direction: column; /* Stack buttons vertically on mobile */
+        flex-direction: column;
       }
+
       .nav-btn {
         padding: 8px 12px;
         font-size: 14px;
       }
+
       h1 {
         font-size: 1.5rem;
       }
+
       h2 {
         font-size: 1.2rem;
       }
     }
+
     @media (max-width: 480px) {
-      .book-container {
-        width: 100vw;
-        height: 100vh;
+      .notebook-container {
+        width: 95vw;
+        height: 90vh;
       }
+
       .page .content {
         padding: 15px;
+        font-size: 13px;
       }
+
       .welcome-page img, .about-section img {
         width: 60px;
         height: 60px;
       }
+
       .nav-btn {
-        padding: 6px 10px;
-        font-size: 12px;
+        padding: 7px 10px;
+        font-size: 13px;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="book-container">
-    <div class="book">
+  <div class="notebook-container">
+    <div class="notebook">
       <!-- Page 1: Welcome -->
       <div class="page active" id="page1">
         <div class="content welcome-page">
-          <img src="img/logo.jpg" alt="Logo" />
-          <h1>Welcome to My Portfolio</h1>
-          <p>I'm Suhaim, a passionate developer & designer.</p>
+          <img src="img/logo.jpg" alt="Suhaim's Logo" loading="lazy" />
+          <h1>Suhaim's Notebook</h1>
+          <p>Developer & Designer</p>
           <div class="nav-buttons">
-            <button class="nav-btn" onclick="flipTo(2)">Next</button>
+            <button class="nav-btn" onclick="flipTo(2)" aria-label="Go to About page">Next</button>
           </div>
         </div>
       </div>
@@ -287,77 +323,41 @@
       <!-- Page 2: About -->
       <div class="page" id="page2">
         <div class="content about-section">
-          <img src="img/me.webp" alt="Profile" />
+          <img src="img/me.webp" alt="Suhaim's Profile" loading="lazy" />
           <h2>About Me</h2>
-          <p>Hello, I'm Suhaim!</p>
-          <p>"I come from Mlaapappuran, Edavanna, Pathappiriyam, a place full of energy and dreams. My dream is to become a Software Engineer. I have built 2 projects and even started a small startup. I am passionate about coding and always curious to learn how things work. I love creating amazing stuff with code. Apart from tech, I am also a rider, enjoying the freedom and thrill of riding."</p>
+          <p>Hi, I'm Suhaim from Edavanna. Aspiring Software Engineer with a passion for coding and creating innovative solutions. I love riding and exploring new tech.</p>
           <div class="nav-buttons">
-            <button class="nav-btn" onclick="flipTo(1)">Back</button>
-            <button class="nav-btn" onclick="flipTo(3)">Next</button>
+            <button class="nav-btn" onclick="flipTo(1)" aria-label="Go back to Welcome page">Back</button>
+            <button class="nav-btn" onclick="flipTo(3)" aria-label="Go to Skills page">Next</button>
           </div>
         </div>
       </div>
 
-      <!-- Page 3: Services -->
+      <!-- Page 3: Skills -->
       <div class="page" id="page3">
-        <div class="content services-section">
-          <h2>My Services</h2>
-          <div class="service-item"><i class="fas fa-paint-brush"></i> UI/UX Design</div>
-          <div class="service-item"><i class="fas fa-mobile-alt"></i> Mobile Responsive Design Page</div>
-          <div class="service-item"><i class="fas fa-table"></i> Responsive Web Page Development</div>
-          <div class="service-item"><i class="fas fa-globe"></i> Visit Our Site: <a href="https://suhaim-portfolio.com" style="color: #0288d1; text-decoration: none;">suhaim-portfolio.com</a></div>
-          <div class="nav-buttons">
-            <button class="nav-btn" onclick="flipTo(2)">Back</button>
-            <button class="nav-btn" onclick="flipTo(4)">Next</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Page 4: Skills -->
-      <div class="page" id="page4">
         <div class="content skills-section">
           <h2>My Skills</h2>
           <div class="skill-item"><i class="fab fa-html5"></i> HTML5</div>
           <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS3</div>
           <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
           <div class="skill-item"><i class="fab fa-react"></i> React</div>
-          <div class="skill-item"><i class="fab fa-bootstrap"></i> Bootstrap</div>
-          <div class="skill-item"><i class="fas fa-code"></i> Python</div>
-          <div class="skill-item"><i class="fas fa-laptop-code"></i> VB.NET</div>
           <div class="nav-buttons">
-            <button class="nav-btn" onclick="flipTo(3)">Back</button>
-            <button class="nav-btn" onclick="flipTo(5)">Next</button>
+            <button class="nav-btn" onclick="flipTo(2)" aria-label="Go back to About page">Back</button>
+            <button class="nav-btn" onclick="flipTo(4)" aria-label="Go to Contact page">Next</button>
           </div>
         </div>
       </div>
 
-      <!-- Page 5: Projects -->
-      <div class="page" id="page5">
-        <div class="content projects-section">
-          <h2>My Projects</h2>
-          <div class="project-item"><i class="fas fa-project-diagram"></i> Clinic Management System</div>
-          <div class="project-item"><i class="fas fa-project-diagram"></i> E-learning App</div>
-          <div class="project-item"><i class="fas fa-project-diagram"></i> Stone Website</div>
-          <div class="project-item"><i class="fas fa-project-diagram"></i> Weather Ply</div>
-          <div class="project-item"><i class="fas fa-project-diagram"></i> Portfolio Website</div>
-          <div class="nav-buttons">
-            <button class="nav-btn" onclick="flipTo(4)">Back</button>
-            <button class="nav-btn" onclick="flipTo(6)">Next</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Page 6: Contact -->
-      <div class="page" id="page6">
-        <div class="content footer">
+      <!-- Page 4: Contact -->
+      <div class="page" id="page4">
+        <div class="content contact-section">
           <h2>Contact Me</h2>
-          <p>Email: alivpsuhaim@gmail.com</p>
+          <p>Email: <a href="mailto:alivpsuhaim@gmail.com" style="color: #fff; text-decoration: none;">alivpsuhaim@gmail.com</a></p>
           <p>Phone: <a href="tel:+918891479505" style="color: #fff; text-decoration: none;">+918891479505</a></p>
-          <h1>Thank You!</h1>
-          <p>Thank you for exploring my portfolio. Feel free to contact me for any projects or collaborations!</p>
+          <p>Thanks for visiting!</p>
           <div class="nav-buttons">
-            <button class="nav-btn" onclick="flipTo(5)">Back</button>
-            <button class="nav-btn" onclick="closePortfolio()">Close</button>
+            <button class="nav-btn" onclick="flipTo(3)" aria-label="Go back to Skills page">Back</button>
+            <button class="nav-btn" onclick="closeNotebook()" aria-label="Close notebook">Close</button>
           </div>
         </div>
       </div>
@@ -365,8 +365,10 @@
   </div>
 
   <script>
+    // Page Flip Functionality
     function flipTo(pageNumber) {
-      document.querySelectorAll('.page').forEach((page, index) => {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach((page, index) => {
         if (index === pageNumber - 1) {
           page.classList.add('active');
           page.classList.remove('flipped');
@@ -379,12 +381,48 @@
       });
     }
 
-    function closePortfolio() {
-      document.querySelector('.book-container').style.opacity = '0';
+    // Close Notebook Animation
+    function closeNotebook() {
+      const notebookContainer = document.querySelector('.notebook-container');
+      notebookContainer.style.transition = 'opacity 0.4s ease';
+      notebookContainer.style.opacity = '0';
       setTimeout(() => {
-        document.querySelector('.book-container').style.display = 'none';
-      }, 500);
+        notebookContainer.style.display = 'none';
+      }, 400);
     }
+
+    // Touch Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.querySelector('.notebook-container').addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.querySelector('.notebook-container').addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      const currentPage = Array.from(document.querySelectorAll('.page')).findIndex(page => page.classList.contains('active')) + 1;
+      
+      if (swipeDistance > 50 && currentPage > 1) {
+        flipTo(currentPage - 1); // Swipe right to go back
+      } else if (swipeDistance < -50 && currentPage < 4) {
+        flipTo(currentPage + 1); // Swipe left to go forward
+      }
+    }
+
+    // Event Delegation for Navigation Buttons
+    document.querySelector('.notebook-container').addEventListener('click', (e) => {
+      const btn = e.target.closest('.nav-btn');
+      if (btn) {
+        const action = btn.getAttribute('onclick');
+        if (action) eval(action);
+      }
+    });
   </script>
 </body>
 </html>

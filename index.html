@@ -1,5 +1,4 @@
-
-      <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -37,7 +36,7 @@
     }
 
     .navbar.scrolled {
-      background: rgba(26, 26, 26, 0.9);
+      background: rgba(26, 26, 26, 0.95);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
 
@@ -185,14 +184,42 @@
       background: #fff;
     }
 
+    #about .about-container {
+      background: #fffef0;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: 0 auto;
+      transition: transform 0.4s ease;
+    }
+
+    #about .about-container:hover {
+      transform: translateY(-5px);
+    }
+
     #about img {
       width: clamp(140px, 25vw, 180px);
       height: clamp(140px, 25vw, 180px);
       border-radius: 50%;
       border: 4px solid #ff6f00;
       margin-bottom: 25px;
+      position: relative;
+      z-index: 1;
       transition: transform 0.5s ease;
       loading: lazy;
+    }
+
+    #about img::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: calc(100% + 20px);
+      height: calc(100% + 20px);
+      background: radial-gradient(circle, rgba(255, 111, 0, 0.2), transparent);
+      border-radius: 50%;
+      z-index: -1;
     }
 
     #about img:hover {
@@ -201,10 +228,9 @@
 
     #about p {
       font-size: clamp(1rem, 2vw, 1.2rem);
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
       color: #555;
+      margin: 10px 0;
+      text-align: center;
     }
 
     /* Services Section */
@@ -243,6 +269,16 @@
     .service-item span {
       font-size: clamp(1rem, 2vw, 1.2rem);
       font-weight: 500;
+    }
+
+    .service-item a {
+      color: #0288d1;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .service-item a:hover {
+      color: #ff6f00;
     }
 
     /* Skills Section */
@@ -401,6 +437,18 @@
       transform: translateY(0);
     }
 
+    .animate-delay-1 {
+      transition-delay: 0.2s;
+    }
+
+    .animate-delay-2 {
+      transition-delay: 0.4s;
+    }
+
+    .animate-delay-3 {
+      transition-delay: 0.6s;
+    }
+
     @keyframes fadeIn {
       0% { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
@@ -448,6 +496,10 @@
 
       .skill-item {
         padding: 12px;
+      }
+
+      #about .about-container {
+        padding: 20px;
       }
     }
 
@@ -499,6 +551,10 @@
         font-size: 1.5rem;
         margin: 0 10px;
       }
+
+      #about .about-container {
+        padding: 15px;
+      }
     }
   </style>
 </head>
@@ -527,9 +583,9 @@
   <section id="home">
     <div class="container">
       <img src="img/logo.jpg" alt="Suhaim's Profile" class="animate" />
-      <h1 class="animate">Welcome to Suhaim's Portfolio</h1>
-      <p class="animate">I'm Suhaim, a passionate developer & designer crafting innovative solutions.</p>
-      <a href="#about" class="btn btn-primary animate" aria-label="Learn more about Suhaim">Explore More</a>
+      <h1 class="animate animate-delay-1">Welcome to Suhaim's Portfolio</h1>
+      <p class="animate animate-delay-2">I'm Suhaim, a passionate developer & designer crafting innovative solutions.</p>
+      <a href="#about" class="btn btn-primary animate animate-delay-3" aria-label="Learn more about Suhaim">Explore More</a>
     </div>
   </section>
 
@@ -537,8 +593,13 @@
   <section id="about">
     <div class="container">
       <h2 class="animate">About Me</h2>
-      <img src="img/me.webp" alt="Suhaim's Profile" class="animate" />
-      <p class="animate">Hello, I'm Suhaim from Mlaapappuran, Edavanna, Pathappiriyam—a vibrant place full of energy and dreams. My goal is to become a Software Engineer. I've built 2 projects and launched a small startup. I'm passionate about coding, always eager to learn how things work, and love creating amazing solutions with code. Beyond tech, I'm a rider, embracing the thrill and freedom of the open road.</p>
+      <div class="about-container">
+        <img src="img/me.webp" alt="Suhaim's Profile" class="animate animate-delay-1" />
+        <p class="animate animate-delay-2">Hello, I'm Suhaim from Mlaapappuran, Edavanna, Pathappiriyam—a vibrant place full of energy and dreams.</p>
+        <p class="animate animate-delay-2">My goal is to become a Software Engineer. I've built 2 projects and launched a small startup.</p>
+        <p class="animate animate-delay-2">I'm passionate about coding, always eager to learn how things work, and love creating amazing solutions with code.</p>
+        <p class="animate animate-delay-2">Beyond tech, I'm a rider, embracing the thrill and freedom of the open road.</p>
+      </div>
     </div>
   </section>
 
@@ -557,7 +618,7 @@
           <div class="service-item"><i class="fas fa-table"></i><span>Responsive Web Development</span></div>
         </div>
         <div class="col-md-6 animate">
-          <div class="service-item"><i class="fas fa-globe"></i><span>Visit Our Site: <a href="https://suhaim-portfolio.com" style="color: #0288d1;">suhaim-portfolio.com</a></span></div>
+          <div class="service-item"><i class="fas fa-globe"></i><span>Visit Our Site: <a href="https://suhaim-portfolio.com">suhaim-portfolio.com</a></span></div>
         </div>
       </div>
     </div>
@@ -621,10 +682,10 @@
   <section id="footer">
     <div class="container">
       <h2 class="animate">Contact Me</h2>
-      <p class="animate">Email: <a href="mailto:alivpsuhaim@gmail.com">alivpsuhaim@gmail.com</a></p>
-      <p class="animate">Phone: <a href="tel:+918891479505">+918891479505</a></p>
-      <p class="animate">Thank you for visiting my portfolio. Let's collaborate!</p>
-      <div class="social-links animate">
+      <p class="animate animate-delay-1">Email: <a href="mailto:alivpsuhaim@gmail.com">alivpsuhaim@gmail.com</a></p>
+      <p class="animate animate-delay-2">Phone: <a href="tel:+918891479505">+918891479505</a></p>
+      <p class="animate animate-delay-3">Thank you for visiting my portfolio. Let's collaborate!</p>
+      <div class="social-links animate animate-delay-3">
         <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>

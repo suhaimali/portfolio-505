@@ -181,6 +181,28 @@
       font-size: clamp(14px, 1.6vw, 16px);
     }
 
+    /* Closing Page */
+    .closing-page {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 15px;
+    }
+
+    .closing-page i {
+      font-size: clamp(30px, 5vw, 40px);
+      color: #ff6f00;
+      margin-bottom: 15px;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards 0.6s;
+    }
+
+    .closing-page p {
+      margin: 6px 0;
+      opacity: 0;
+      animation: fadeIn 0.8s forwards 0.4s;
+      font-size: clamp(14px, 1.6vw, 16px);
+    }
+
     /* Navigation Buttons */
     .nav-buttons {
       position: absolute;
@@ -272,6 +294,10 @@
       h2 {
         font-size: 1.2rem;
       }
+
+      .closing-page i {
+        font-size: 30px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -301,6 +327,10 @@
 
       h2 {
         font-size: 1.1rem;
+      }
+
+      .closing-page i {
+        font-size: 25px;
       }
     }
   </style>
@@ -354,10 +384,23 @@
           <h2>Contact Me</h2>
           <p>Email: <a href="mailto:alivpsuhaim@gmail.com" style="color: #fff; text-decoration: none;">alivpsuhaim@gmail.com</a></p>
           <p>Phone: <a href="tel:+918891479505" style="color: #fff; text-decoration: none;">+918891479505</a></p>
-          <p>Thanks for visiting!</p>
+          <p>Let's collaborate!</p>
           <div class="nav-buttons">
             <button class="nav-btn" onclick="flipTo(3)" aria-label="Go back to Skills page">Back</button>
-            <button class="nav-btn" onclick="closeNotebook()" aria-label="Close notebook">Close</button>
+            <button class="nav-btn" onclick="flipTo(5)" aria-label="Go to Closing page">Next</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page 5: Closing Page -->
+      <div class="page" id="page5">
+        <div class="content closing-page">
+          <i class="fas fa-book"></i>
+          <h2>Thank You!</h2>
+          <p>Thanks for exploring my portfolio. Hope to connect soon!</p>
+          <div class="nav-buttons">
+            <button class="nav-btn" onclick="flipTo(4)" aria-label="Go back to Contact page">Back</button>
+            <button class="nav-btn" onclick="closeNotebook()" aria-label="Close notebook">Close Notebook</button>
           </div>
         </div>
       </div>
@@ -410,7 +453,7 @@
       
       if (swipeDistance > 50 && currentPage > 1) {
         flipTo(currentPage - 1); // Swipe right to go back
-      } else if (swipeDistance < -50 && currentPage < 4) {
+      } else if (swipeDistance < -50 && currentPage < 5) {
         flipTo(currentPage + 1); // Swipe left to go forward
       }
     }
